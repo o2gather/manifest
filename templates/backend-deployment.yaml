@@ -19,14 +19,7 @@ spec:
         ports:
         - containerPort: 8080
         env:
-          - name: DATABASE_URL
-            value: "{{ .Values.app.env.database_url }}"
-          - name: REDIS_URL
-            value: "{{ .Values.app.env.redis_url }}"
-          - name: GOOGLE_CLIENT_ID
-            value: "{{ .Values.app.env.google_client_id }}"
-          - name: SECRET_KEY
-            value: "{{ .Values.app.env.secret_key }}"
+          {{- include "helpers.list-env-variables" . | indent 10 }}
           - name: CORS
             value: "{{ .Values.app.env.cors }}"
         resources:

@@ -17,7 +17,6 @@ spec:
       - name: backend-init
         image: "{{ .Values.app.backend_init.image.repo }}:{{ .Values.app.backend_init.image.tag }}"
         env:
-        - name: DATABASE_URL
-          value: "{{ .Values.app.env.database_url }}"
+          {{- include "helpers.list-env-variables" . | indent 10 }}
       restartPolicy: Never
   backoffLimit: 4
