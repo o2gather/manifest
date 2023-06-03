@@ -6,15 +6,13 @@ app:
       - GOOGLE_CLIENT_ID
       - SECRET_KEY
     cors: "true"
-
   backend_init:
     image:
       repo: ghcr.io/o2gather/backend-init
-      tag: v0.9.7
-      
+      tag: v0.9.10
   backend:
     image:
       repo: ghcr.io/o2gather/backend
-      tag: v0.9.7
+      tag: v0.9.10
     ingress:
       host: o2gather.ptass.org
