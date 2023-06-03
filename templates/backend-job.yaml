@@ -1,0 +1,23 @@
+kind: Job
+apiVersion: batch/v1
+metadata:
+  name: backend-init
+  labels:
+    helm.sh/chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+  annotations:
+    # This is what defines this resource as a hook. Without this line, the
+    # job is considered part of the release.
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: backend-init
+        image: "{{ .Values.app.backend_init.image.repo }}:{{ .Values.app.backend_init.image.tag }}"
+        env:
+        - name: DATABASE_URL
+          value: "{{ .Values.app.env.database_url }}"
+      restartPolicy: Never
+  backoffLimit: 4

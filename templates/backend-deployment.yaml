@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: "{{ .Values.app.backend.image.repo }}:{{ .Values.app.backend.image.tag }}"
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DATABASE_URL
+            value: "{{ .Values.app.env.database_url }}"
+          - name: REDIS_URL
+            value: "{{ .Values.app.env.redis_url }}"
+          - name: GOOGLE_CLIENT_ID
+            value: "{{ .Values.app.env.google_client_id }}"
+          - name: SECRET_KEY
+            value: "{{ .Values.app.env.secret_key }}"
+          - name: CORS
+            value: "{{ .Values.app.env.cors }}"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        readinessProbe:
+          exec:
+            command: ["curl", "-f", "http://localhost:8080/ping"]
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+        livenessProbe:
+          exec:
+            command: ["curl", "-f", "http://localhost:8080/ping"]
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5

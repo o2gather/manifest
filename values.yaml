@@ -1,0 +1,19 @@
+app:
+  env:
+    database_url: postgres://o2gather:jA2CrGqK@cockroachdb-public.cockroach-operator-system:26257/o2gather?sslmode=require
+    redis_url: redis://keydb.redis:6379/3
+    google_client_id: 38707994761-ei0ervkvblauqoartqjq2ku9brs1obov.apps.googleusercontent.com
+    secret_key: kogb7KaolEJu0i0YkahMo/XXtFHp8Xc2iZEgOu/S12Aa/n7LWdL8Zuz1hQ4GutJ7PwxRTt0k1i2g10xcMIV6ag==
+    cors: "true"
+
+  backend_init:
+    image:
+      repo: ghcr.io/o2gather/backend-init
+      tag: v0.9.7
+      
+  backend:
+    image:
+      repo: ghcr.io/o2gather/backend
+      tag: v0.9.7
+    ingress:
+      host: o2gather.ptass.org
