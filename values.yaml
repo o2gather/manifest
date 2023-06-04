@@ -5,6 +5,7 @@ app:
       - REDIS_URL
       - GOOGLE_CLIENT_ID
       - SECRET_KEY
+      - REDIRECT_URL
     cors: "true"
   backend_init:
     image:
