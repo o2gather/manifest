@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: backend
+  name: o2gather
 spec:
   selector:
     istio: ingressgateway
@@ -11,7 +11,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "{{ .Values.app.backend.ingress.host }}"
+    - "{{ .Values.app.host }}"
   - port:
       number: 443
       name: https
@@ -20,4 +20,4 @@ spec:
       mode: SIMPLE
       credentialName: cloudflare
     hosts:
-    - "{{ .Values.app.backend.ingress.host }}"
+    - "{{ .Values.app.host }}"
