@@ -25,3 +25,15 @@ spec:
           limits:
             cpu: 200m
             memory: 256Mi
+        livenessProbe:
+          httpGet:
+            path: /favicon.svg
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /favicon.svg
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 3
