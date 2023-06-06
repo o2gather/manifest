@@ -10,7 +10,7 @@ app:
   frontend:
     image:
       repo: ghcr.io/o2gather/frontend
-      tag: v0.1.17
+      tag: v0.1.18
   backend_init:
     image:
       repo: ghcr.io/o2gather/backend-init
