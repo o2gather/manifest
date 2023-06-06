@@ -14,9 +14,9 @@ app:
   backend_init:
     image:
       repo: ghcr.io/o2gather/backend-init
-      tag: v0.10.7
+      tag: v0.12.0
   backend:
     image:
       repo: ghcr.io/o2gather/backend
-      tag: v0.10.7
+      tag: v0.12.0
   host: o2gather.ptass.org
